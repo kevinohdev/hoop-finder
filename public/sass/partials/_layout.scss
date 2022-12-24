@@ -1,0 +1,33 @@
+html {
+  font-size: 10px;
+}
+
+body {
+  background: #efefef;
+}
+
+.nav {
+  display: flex;
+  background: dodgerblue;
+  flex-direction: row;
+  text-decoration: none;
+  list-style: none;
+
+  height: 50px;
+
+  justify-content: space-between;
+}
+
+.nav__section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav__section--pages {
+  background-color: bisque;
+
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
+}
