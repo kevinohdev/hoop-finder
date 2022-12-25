@@ -1,0 +1,14 @@
+.tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: grid;
+  grid-auto-flow: column;
+  margin-right: 1rem;
+}

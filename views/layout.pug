@@ -14,7 +14,12 @@ html
           .nav__section.nav__section--pages
            each item in h.menu 
             li.nav__item
-              span #{item.title}
+              a(href=item.slug)
+                span #{item.title}
+                div 
+    .content
+      block content 
+        p default
             
             
               
