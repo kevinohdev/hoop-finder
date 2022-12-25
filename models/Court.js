@@ -11,9 +11,9 @@ const courtSchema = new mongoose.Schema({
   slug: String,
   description: {
     type: String,
-    trime: true
+    trim: true
   },
-  tag: [String],
+  tags: [String],
 });
 
 courtSchema.pre('save', function(next) {

@@ -10,5 +10,6 @@
 .tag {
   display: grid;
   grid-auto-flow: column;
-  margin-right: 1rem;
+  margin: 1rem;
+  gap: 1rem;
 }
