@@ -49,10 +49,11 @@ p {
   font-size: 40px;
   z-index: 2;
   line-height: 1.1;
-  transform: skew(0, -3deg);
+
   &--long {
     font-size: 30px;
   }
+
   &:before {
     content: "";
     width: 50px;
@@ -63,9 +64,10 @@ p {
     display: block;
     position: absolute;
     z-index: -1;
-    transform: skew(-5deg);
   }
+
   line-height: 1.1;
+
   // inline link inside
   a {
     border-bottom: 0;

@@ -1,0 +1,9 @@
+mixin courtCard(court = {})
+  .court
+    .court__hero 
+      img(src=`/uploads/${court.photo || 'court.jpg'}`)
+    .court__description 
+      h3
+        a(href=`/court/${court.name}`) #{court.name}
+      p #{court.description}
+

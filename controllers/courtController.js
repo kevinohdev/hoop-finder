@@ -15,3 +15,9 @@ exports.createCourt = async (req, res) => {
   req.flash('success', `Sucessfully created ${court.name}.`)
   res.redirect(`/court/${court.slug}`);
 }
+
+exports.getCourt = async (req, res) => {
+  const courts = await Court.find();
+  console.log(courts);
+  res.render('courts', { title: 'Courts', courts })
+}

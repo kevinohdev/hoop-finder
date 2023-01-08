@@ -4,7 +4,8 @@ const courtController = require('../controllers/courtController');
 const { catchErrors } = require('../handlers/errorHandlers')
 
 // Do work here
-router.get('/', courtController.homePage);
+router.get('/', catchErrors(courtController.getCourt));
+router.get('/courts', catchErrors(courtController.getCourt));
 router.get('/add', courtController.addCourt);
 router.post('/add', catchErrors(courtController.createCourt));
 
