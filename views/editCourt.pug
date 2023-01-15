@@ -2,6 +2,7 @@ extends layout
 
 include mixins/_courtForm
 
-block content 
-  h2 #{title}
-  +courtForm()
+block content
+  .editCourt
+    h2 #{title}
+    +courtForm(court)

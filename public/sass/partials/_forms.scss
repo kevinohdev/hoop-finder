@@ -1,7 +1,9 @@
-input, textarea {
-  width:100%;
-  padding:10px;
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
   border: 1px solid $grey;
+
   &.input {
     &--error {
       border-color: red;
@@ -18,9 +20,11 @@ label {
   background: white;
   padding: 2rem;
   box-shadow: $grad;
-  & + .form {
+
+  &+.form {
     margin-top: 4rem;
   }
+
   // I know this isn't bem but meh
   h2 {
     margin: 0;
@@ -29,4 +33,9 @@ label {
     margin-bottom: 2rem;
     border-bottom: 1px solid $grey;
   }
+}
+
+.editCourt {
+  max-width: 580px;
+  margin: 0 auto;
 }

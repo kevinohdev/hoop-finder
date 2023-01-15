@@ -21,3 +21,18 @@ exports.getCourt = async (req, res) => {
   console.log(courts);
   res.render('courts', { title: 'Courts', courts })
 }
+
+exports.editCourt = async (req, res) => {
+  const court = await Court.findOne({_id: req.params.id});
+  res.render('editCourt', { title: `Edit ${court.name}`, court});
+}
+
+exports.updateCourt = async (req, res) => {
+  const court = await Court.findOneAndUpdate({ _id: req.params.id}, req.body, {
+    new: true,
+    runValidators: true
+  }).exec();
+
+  req.flash('success', `Updated ${court.name} <a href="/courts/${court.slug}"> View Court </a>`);
+  res.redirect(`/courts/${court._id}/edit`);
+}

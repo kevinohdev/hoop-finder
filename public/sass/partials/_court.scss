@@ -1,7 +1,7 @@
 .courts {
   display: grid;
-  // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-template-rows: repeat(1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
   grid-gap: 1rem;
 
   max-width: 1000px;
@@ -11,6 +11,10 @@
 
 .court {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
   width: 100%;
   background-color: chartreuse;
 }
@@ -20,5 +24,13 @@
     width: 25rem;
     height: 25rem;
     object-fit: cover;
+    margin: 3rem;
+  }
+}
+
+.court__action--edit {
+  a {
+    font-size: 2rem;
+    text-decoration: none;
   }
 }

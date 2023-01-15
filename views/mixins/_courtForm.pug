@@ -1,13 +1,14 @@
 mixin courtForm(court = {})
-  form(action="/add" method="POST")
+  form(action=`/add/${court._id || ''}` method="POST")
     label(for="name") Name 
-    input(type="text" name="name" id="name")
+    input(type="text" name="name" id="name" value=court.name)
     label(for="description") Description 
-    textarea(name="description" id="description")
+    textarea(name="description" id="description")= court.description
     - const choices = ['Full Court', 'Half Court', 'Multiple Courts', 'Restrooms', 'Parking Lot']
+    - const tags = court.tags || []
     ul.tags
       each choice in choices 
         .tag.tag__choice  
-          input(type="checkbox" id=choice value=choice name="tags")
+          input(type="checkbox" id=choice value=choice name="tags" checked=(tags.includes(choice)))
           label(for=choice) #{choice}
     input(type="submit" value="Save" class="button")

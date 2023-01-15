@@ -6,4 +6,8 @@ mixin courtCard(court = {})
       h3
         a(href=`/court/${court.name}`) #{court.name}
       p #{court.description}
+    .court__actions 
+      .court__action.court__action--edit
+        a(href=`/courts/${court._id}/edit`) edit
+
 
