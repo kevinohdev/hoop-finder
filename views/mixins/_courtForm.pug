@@ -4,6 +4,12 @@ mixin courtForm(court = {})
     input(type="text" name="name" id="name" value=court.name)
     label(for="description") Description 
     textarea(name="description" id="description")= court.description
+    label(for="address") Address
+    input(type="text" id="address" name="location[address]" value=(court.location && court.location.address))
+    label(for="lng") Address Lng 
+    input(type="text" id="lng" name="location[coordinates][0]" value=(court.location && court.location.coordinates[0]) required) 
+    label(for="lat") Address Lat 
+    input(type="text" id="lat" name="location[coordinates][1]" value=(court.location && court.location.coordinates[1]) required) 
     - const choices = ['Full Court', 'Half Court', 'Multiple Courts', 'Restrooms', 'Parking Lot']
     - const tags = court.tags || []
     ul.tags
