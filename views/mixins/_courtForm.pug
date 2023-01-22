@@ -1,9 +1,14 @@
 mixin courtForm(court = {})
-  form(action=`/add/${court._id || ''}` method="POST")
+  form(action=`/add/${court._id || ''}` method="POST" 
+  enctype="multipart/form-data")
     label(for="name") Name 
     input(type="text" name="name" id="name" value=court.name)
     label(for="description") Description 
     textarea(name="description" id="description")= court.description
+    label(for="photo") Photo 
+      input(type="file" name="photo" id="photo" accept="image/gif, image/jpeg, image/png")
+      if court.photo  
+        img(src=`/uploads/${court.photo}`, alt=court.name width=200)
     label(for="address") Address
     input(type="text" id="address" name="location[address]" value=(court.location && court.location.address))
     label(for="lng") Address Lng 
