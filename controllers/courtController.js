@@ -68,4 +68,10 @@ exports.updateCourt = async (req, res) => {
 
   req.flash('success', `Updated ${court.name} <a href="/courts/${court.slug}"> View Court </a>`);
   res.redirect(`/courts/${court._id}/edit`);
-}
+};
+
+exports.getCourtBySlug = async (req, res, next) => {
+  const court = await Court.findOne({ slug: req.params.slug });
+  if(!court) return next(); 
+  res.render('court', { court, title: court.name }); 
+};

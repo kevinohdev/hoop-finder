@@ -4,7 +4,7 @@ mixin courtCard(court = {})
       img(src=`/uploads/${court.photo || 'court.jpg'}`)
     .court__description 
       h3
-        a(href=`/court/${court.name}`) #{court.name}
+        a(href=`/court/${court.slug}`) #{court.name}
       p #{court.description}
     .court__actions 
       .court__action.court__action--edit

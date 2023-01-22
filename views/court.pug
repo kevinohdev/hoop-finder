@@ -1,0 +1,13 @@
+extends layout 
+
+block content   
+  h2 #{court.name}
+  img(src=`/uploads/${court.photo || court.jpg}`)
+  img(src=h.staticMap(court.location.coordinates))
+  if court.tags   
+    ul.tags   
+      each tag in court.tags 
+        li.tag  
+          a.tag__link(href=`/tags/${tags}`)
+            span.tag__text ##{tag}
+  p.description #{court.description}

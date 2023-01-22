@@ -20,4 +20,6 @@ router.post('/add/:id',
 
 router.get('/courts/:id/edit', catchErrors(courtController.editCourt));
 
+router.get('/court/:slug/', catchErrors(courtController.getCourtBySlug));
+
 module.exports = router;
