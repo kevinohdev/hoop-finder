@@ -17,7 +17,8 @@ label {
 }
 
 .form {
-  background: white;
+  background: indianred;
+  max-width: 1200px;
   padding: 2rem;
   box-shadow: $grad;
 
@@ -33,9 +34,4 @@ label {
     margin-bottom: 2rem;
     border-bottom: 1px solid $grey;
   }
-}
-
-.editCourt {
-  max-width: 580px;
-  margin: 0 auto;
 }

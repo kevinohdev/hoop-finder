@@ -10,13 +10,20 @@ html
       header.top
         nav.nav
           .nav__section.nav__section--logo
-            a(href="/") Hoop Finder
+            li 
+              a(href="/") Hoop Finder
           .nav__section.nav__section--pages
-           each item in h.menu 
+            each item in h.menu 
+              li.nav__item
+                a(href=item.slug)
+                  span #{item.title}
+                  div
+          .nav__section.nav__section--user
             li.nav__item
-              a(href=item.slug)
-                span #{item.title}
-                div
+              a(href="/register") Register
+            li.nav__item
+              a(href="/login") Log In
+        
     block messages
       if locals.flashes
         .inner

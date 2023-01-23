@@ -3,7 +3,22 @@ html {
 }
 
 body {
-  background: #efefef;
+  // background: #efefef;
+  background-color: aquamarine;
+
+}
+
+.inner {
+  max-width: 900px;
+  margin: 0 auto;
+
+  @media all and (max-width: 900px) {
+    padding: 2rem;
+  }
+
+  &--flashes {
+    padding: 0;
+  }
 }
 
 .nav {
@@ -22,6 +37,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  li {
+    padding: 1rem;
+  }
 }
 
 .nav__section--pages {
