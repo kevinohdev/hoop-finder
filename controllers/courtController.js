@@ -75,3 +75,15 @@ exports.getCourtBySlug = async (req, res, next) => {
   if(!court) return next(); 
   res.render('court', { court, title: court.name }); 
 };
+
+exports.getCourtsByTag = async (req, res) => {
+  const tag = req.params.tag;
+  const tagQuery = tag || { $exists: true, $ne: [] };
+
+  const tagsPromise = Court.getTagsList();
+  const courtsPromise = Court.find({ tags: tagQuery });
+  const [tags, courts] = await Promise.all([tagsPromise, courtsPromise]);
+
+
+  res.render('tag', { tags, title: 'Tags', tag, courts });
+};

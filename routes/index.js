@@ -22,4 +22,7 @@ router.get('/courts/:id/edit', catchErrors(courtController.editCourt));
 
 router.get('/court/:slug/', catchErrors(courtController.getCourtBySlug));
 
+router.get('/tags', catchErrors(courtController.getCourtsByTag));
+router.get('/tags/:tag', catchErrors(courtController.getCourtsByTag));
+
 module.exports = router;
