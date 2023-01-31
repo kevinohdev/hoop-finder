@@ -8,7 +8,7 @@ const { catchErrors } = require('../handlers/errorHandlers')
 // Do work here
 router.get('/', catchErrors(courtController.getCourt));
 router.get('/courts', catchErrors(courtController.getCourt));
-router.get('/add', courtController.addCourt);
+router.get('/add', authController.isLoggedIn,courtController.addCourt);
 
 router.post('/add', 
   courtController.upload,
@@ -28,10 +28,14 @@ router.get('/tags', catchErrors(courtController.getCourtsByTag));
 router.get('/tags/:tag', catchErrors(courtController.getCourtsByTag));
 
 router.get('/login', userController.loginForm);
+router.post('/login', authController.login);
+
 router.get('/register', userController.registerForm);
 router.post('/register', 
   userController.validateRegister,
   userController.register,
-  authController.login)
+  authController.login);
+
+router.get('/logout', authController.logout);
 
 module.exports = router;

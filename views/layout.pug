@@ -19,10 +19,16 @@ html
                   span #{item.title}
                   div
           .nav__section.nav__section--user
-            li.nav__item
-              a(href="/register") Register
-            li.nav__item
-              a(href="/login") Log In
+            if user
+              li.nav__item
+                a(href="/logout") Log Out
+              li.nav__item
+                a(href="/myaccount") My Account
+            else 
+              li.nav__item
+                a(href="/register") Register
+              li.nav__item
+                a(href="/login") Log In
         
     block messages
       if locals.flashes
