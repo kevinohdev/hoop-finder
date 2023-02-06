@@ -29,7 +29,10 @@ html
                 a(href="/register") Register
               li.nav__item
                 a(href="/login") Log In
-        
+        .search 
+          input.search__input(type="text" placeholder="Full court, pick up games" name="search")
+          .search__results
+
     block messages
       if locals.flashes
         .inner

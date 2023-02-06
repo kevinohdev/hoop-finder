@@ -98,7 +98,7 @@ exports.getCourtsByTag = async (req, res) => {
 };
 
 exports.searchCourts = async (req, res) => {
-  const stores = await Store
+  const courts = await Court
   .find({
     $text: {
       $search: req.query.q
@@ -110,5 +110,5 @@ exports.searchCourts = async (req, res) => {
     score: { $meta: 'textScore' }
   })
   .limit(5);
-  res.json(stores);
+  res.json(courts);
 };

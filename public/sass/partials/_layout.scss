@@ -31,6 +31,10 @@ body {
   height: 50px;
 
   justify-content: space-between;
+
+  &--search {
+    flex: 1 1 auto;
+  }
 }
 
 .nav__section {
@@ -49,4 +53,10 @@ body {
   flex: 1;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.search__results {
+  display: flex;
+  background-color: white;
+  padding: 1rem;
 }
