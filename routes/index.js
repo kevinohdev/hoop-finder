@@ -49,4 +49,6 @@ router.post('/account/reset/:token',
   catchErrors(authController.update)
 );
 
+router.get('/api/search', catchErrors(courtController.searchCourts));
+
 module.exports = router;

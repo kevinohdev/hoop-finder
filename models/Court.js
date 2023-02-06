@@ -32,8 +32,18 @@ const courtSchema = new mongoose.Schema({
       required: 'You must supply an address!'
     }
   },
-  photo: String
+  photo: String,
+  author: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    require: 'You must supply an author'
+  }
 });
+
+courtSchema.index({
+  name: 'text', 
+  description: 'text'
+})
 
 courtSchema.pre('save', async function(next) {
   if (!this.isModified('name')) {

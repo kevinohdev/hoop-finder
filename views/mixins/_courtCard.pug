@@ -6,8 +6,9 @@ mixin courtCard(court = {})
       h3
         a(href=`/court/${court.slug}`) #{court.name}
       p #{court.description}
-    .court__actions 
-      .court__action.court__action--edit
-        a(href=`/courts/${court._id}/edit`) edit
+    .court__actions
+       if user && court.author.equals(user._id)
+        .court__action.court__action--edit
+          a(href=`/courts/${court._id}/edit`) edit
 
 

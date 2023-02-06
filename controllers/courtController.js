@@ -42,6 +42,7 @@ exports.addCourt = (req, res) => {
 }
 
 exports.createCourt = async (req, res) => {
+  req.body.author = req.user._id;
   const court = await (new Court(req.body)).save();
   await court.save();
   req.flash('success', `Sucessfully created ${court.name}.`)
@@ -54,8 +55,15 @@ exports.getCourt = async (req, res) => {
   res.render('courts', { title: 'Courts', courts })
 }
 
+const confirmOwner = (store, user) => {
+  if(!court.author.equals(user._id)) {
+    throw Error('You must be the author of this court to edit it.')
+  }
+};
+
 exports.editCourt = async (req, res) => {
   const court = await Court.findOne({_id: req.params.id});
+  confirmOwner(court, req.user);
   res.render('editCourt', { title: `Edit ${court.name}`, court});
 }
 
@@ -71,7 +79,8 @@ exports.updateCourt = async (req, res) => {
 };
 
 exports.getCourtBySlug = async (req, res, next) => {
-  const court = await Court.findOne({ slug: req.params.slug });
+  const court = await Court.findOne({ slug: req.params.slug }).
+  populate('author');
   if(!court) return next(); 
   res.render('court', { court, title: court.name }); 
 };
@@ -86,4 +95,20 @@ exports.getCourtsByTag = async (req, res) => {
 
 
   res.render('tag', { tags, title: 'Tags', tag, courts });
+};
+
+exports.searchCourts = async (req, res) => {
+  const stores = await Store
+  .find({
+    $text: {
+      $search: req.query.q
+    }
+  }, {
+    score: { $meta: 'textScore' }
+  })
+  .sort({
+    score: { $meta: 'textScore' }
+  })
+  .limit(5);
+  res.json(stores);
 };
