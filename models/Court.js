@@ -43,7 +43,11 @@ const courtSchema = new mongoose.Schema({
 courtSchema.index({
   name: 'text', 
   description: 'text'
-})
+});
+
+courtSchema.index({
+  location: '2dsphere'
+});
 
 courtSchema.pre('save', async function(next) {
   if (!this.isModified('name')) {

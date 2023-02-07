@@ -55,7 +55,7 @@ exports.getCourt = async (req, res) => {
   res.render('courts', { title: 'Courts', courts })
 }
 
-const confirmOwner = (store, user) => {
+const confirmOwner = (court, user) => {
   if(!court.author.equals(user._id)) {
     throw Error('You must be the author of this court to edit it.')
   }
@@ -111,4 +111,22 @@ exports.searchCourts = async (req, res) => {
   })
   .limit(5);
   res.json(courts);
+};
+
+exports.mapStores = async (req, res) => {
+  const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+  const q = {
+    location: {
+      $near: {
+        $geometry: {
+          type: 'Point',
+          coordinates
+        },
+        $maxDistance: 10000 // 10km
+      }
+    }
+  };
+
+  const stores = await Store.find(q).select('slug name description location photo').limit(10);
+  res.json(stores);
 };

@@ -4,7 +4,7 @@ import dompurify from 'dompurify';
 function searchResultsHTML(courts) {
   return courts.map(store => {
     return `
-      <a href="/store/${store.slug}" class="search__result">
+      <a href="/court/${store.slug}" class="search__result">
         <strong>${store.name}</strong>
       </a>
     `;
@@ -18,14 +18,12 @@ function typeAhead(search) {
   const searchResults = search.querySelector('.search__results');
 
   searchInput.on('input', function() {
-    // if there is no value, quit it!
     if (!this.value) {
       searchResults.style.display = 'none';
-      return; // stop!
+      return; 
     }
 
-    // show the search results!
-    searchResults.style.display = 'block';
+    searchResults.style.display = 'flex';
 
     axios
       .get(`/api/search?q=${this.value}`)
@@ -34,7 +32,7 @@ function typeAhead(search) {
           searchResults.innerHTML = dompurify.sanitize(searchResultsHTML(res.data));
           return;
         }
-        // tell them nothing came back
+        
         searchResults.innerHTML = dompurify.sanitize(`<div class="search__result">No results for ${this.value}</div>`);
       })
       .catch(err => {
@@ -42,11 +40,10 @@ function typeAhead(search) {
       });
   });
 
-  // handle keyboard inputs
+  
   searchInput.on('keyup', (e) => {
-    // if they aren't pressing up, down or enter, who cares!
     if (![38, 40, 13].includes(e.keyCode)) {
-      return; // nah
+      return; 
     }
     const activeClass = 'search__result--active';
     const current = search.querySelector(`.${activeClass}`);
