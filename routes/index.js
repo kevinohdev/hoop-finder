@@ -51,5 +51,10 @@ router.post('/account/reset/:token',
 
 router.get('/api/search', catchErrors(courtController.searchCourts));
 router.get('/api/stores/near', catchErrors(courtController.mapCourts));
+router.post('/api/courts/:id/heart', catchErrors(courtController.heartCourt));
+
+router.get('/map', courtController.mapPage);
+
+router.get('/hearts', authController.isLoggedIn,catchErrors(courtController.hearts));
 
 module.exports = router;

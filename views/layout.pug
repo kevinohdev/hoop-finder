@@ -20,6 +20,9 @@ html
                   div
           .nav__section.nav__section--user
             if user
+              li.nav__item: a.nav__link(href="/hearts", class=(currentPath.startsWith('/hearts') ? 'nav__link--active' : ''))
+                != h.icon('heart')
+                span.heart-count #{user.hearts && user.hearts.length}
               li.nav__item
                 a(href="/logout") Log Out
               li.nav__item
@@ -47,10 +50,7 @@ html
       block content 
         p default
             
-            
-              
-        
-
+  
     block scripts
-      script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+      script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places&callback=Function.prototype`)
       script(src="/dist/App.bundle.js")

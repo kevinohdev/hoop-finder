@@ -7,7 +7,14 @@ mixin courtCard(court = {})
         a(href=`/court/${court.slug}`) #{court.name}
       p #{court.description}
     .court__actions
-       if user && court.author.equals(user._id)
+      if user
+        .court__action.court__action--heart 
+          form.heart(method="POST" action=`/api/courts/${court._id}/heart`)
+            - const heartStrings = user.hearts.map(obj => obj.toString())
+            - const heartClass = heartStrings.includes(court._id.toString()) ? 'heart__button--hearted' : ''
+            button.heart__button(type="submit" name="heart")
+              != h.icon('heart') 
+      if user && court.author.equals(user._id)
         .court__action.court__action--edit
           a(href=`/courts/${court._id}/edit`) edit
 
