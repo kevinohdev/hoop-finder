@@ -1,5 +1,7 @@
 extends layout 
 
+include mixins/_reviewForm
+
 block content   
   h2 #{court.name}
   img(src=`/uploads/${court.photo || 'court.jpg'}`)
@@ -11,3 +13,6 @@ block content
           a.tag__link(href=`/tags/${tags}`)
             span.tag__text ##{tag}
   p.description #{court.description}
+
+  if user   
+    +reviewForm(court)

@@ -3,6 +3,8 @@ const router = express.Router();
 const courtController = require('../controllers/courtController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const reviewController = require('../controllers/reviewController');
+
 const { catchErrors } = require('../handlers/errorHandlers')
 
 // Do work here
@@ -56,5 +58,9 @@ router.post('/api/courts/:id/heart', catchErrors(courtController.heartCourt));
 router.get('/map', courtController.mapPage);
 
 router.get('/hearts', authController.isLoggedIn,catchErrors(courtController.hearts));
+router.post('/reviews/:id',
+  authController.isLoggedIn,
+  catchErrors(reviewController.addReview)
+);
 
 module.exports = router;
