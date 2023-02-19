@@ -38,7 +38,11 @@ const courtSchema = new mongoose.Schema({
     ref: 'User',
     require: 'You must supply an author'
   }
-});
+  }, {
+    toJSON: { virtuals: true }, 
+    toObject: { virtuals: true } 
+  }
+);
 
 courtSchema.index({
   name: 'text', 
@@ -62,7 +66,7 @@ courtSchema.pre('save', async function(next) {
     this.slug = `${this.slug}-${storesWithSlug.length + 1}`;
   }
   next();
-})
+});
 
 courtSchema.statics.getTagsList = function() {
   return this.aggregate([
@@ -70,6 +74,12 @@ courtSchema.statics.getTagsList = function() {
     { $group: { _id: '$tags', count: { $sum: 1 } } },
     { $sort: { count: -1 } }
   ]);
-}
+};
+
+courtSchema.virtual('reviews', {
+  ref: 'Review', 
+  localField: '_id', 
+  foreignField: 'court'
+});
 
 module.exports = mongoose.model('Court', courtSchema);

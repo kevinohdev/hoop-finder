@@ -81,7 +81,7 @@ exports.updateCourt = async (req, res) => {
 
 exports.getCourtBySlug = async (req, res, next) => {
   const court = await Court.findOne({ slug: req.params.slug }).
-  populate('author');
+  populate('author reviews');
   if(!court) return next(); 
   res.render('court', { court, title: court.name }); 
 };
