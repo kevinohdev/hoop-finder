@@ -10,6 +10,7 @@ const { catchErrors } = require('../handlers/errorHandlers')
 // Do work here
 router.get('/', catchErrors(courtController.getCourt));
 router.get('/courts', catchErrors(courtController.getCourt));
+router.get('/courts/page/:page', catchErrors(courtController.getCourt));
 router.get('/add', authController.isLoggedIn,courtController.addCourt);
 
 router.post('/add', 

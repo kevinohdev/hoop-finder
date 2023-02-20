@@ -51,9 +51,32 @@ exports.createCourt = async (req, res) => {
 }
 
 exports.getCourt = async (req, res) => {
-  const courts = await Court.find();
-  console.log(courts);
-  res.render('courts', { title: 'Courts', courts })
+  const page = req.params.page || 1;
+  const limit = 4;
+  const skip = (page * limit) - limit;
+
+  const courtsPromise = Court
+    .find()
+    .skip(skip)
+    .limit(limit)
+    .sort({ created: 'desc' });
+
+  const countPromise = Court.count();
+
+  const [courts, count] = await Promise.all([courtsPromise, countPromise]);
+  const pages = Math.ceil(count / limit);
+  if (!courts.length && skip) {
+    req.flash('info', `Hey! You asked for page ${page}. But that doesn't exist. So I put you on page ${pages}`);
+    res.redirect(`/courts/page/${pages}`);
+    return;
+  }
+
+  if(!courts.length && skip) {
+    req.flash('info', `Sorry, ${page} does not exist.  Redirected to ${pages}`)
+    res.redirect(`/stores/page/${pages}`);
+    return;
+  }
+  res.render('courts', { title: 'courts', courts, page, pages, count });  
 }
 
 const confirmOwner = (court, user) => {

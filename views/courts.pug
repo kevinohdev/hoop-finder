@@ -1,9 +1,12 @@
 extends layout 
 
 include mixins/_courtCard
+include mixins/_pagination
+
 block content 
   .inner
    h2= title 
     .courts   
       each court in courts
         +courtCard(court)
+    +pagination(page, pages, count)
