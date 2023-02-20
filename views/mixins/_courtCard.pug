@@ -17,5 +17,8 @@ mixin courtCard(court = {})
       if user && court.author.equals(user._id)
         .court__action.court__action--edit
           a(href=`/courts/${court._id}/edit`) edit
-
+      if court.reviews
+          .court__action.court__action--count
+            != h.icon('review')
+            span= court.reviews.length > 0 ? court.reviews.length : ''
 

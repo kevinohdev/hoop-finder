@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  .inner
+    h2 Top #{courts.length} courts
+    table.table
+      thead
+        td photo
+        td ranking
+        td name
+        td reviews
+        td Average Rating
+      each court, i in courts
+        tr
+          td
+            a(href=`/court/${court.slug}`)
+              img(width=200 src=`/uploads/${court.photo || 'court.jpg'}` alt=court.name)
+          td #{i + 1}
+          td: a(href=`/court/${court.slug}`)= court.name
+          td= court.reviews.length
+          td #{Math.round(court.averageRating * 10) / 10} / 5

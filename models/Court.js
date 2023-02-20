@@ -82,4 +82,30 @@ courtSchema.virtual('reviews', {
   foreignField: 'court'
 });
 
+courtSchema.statics.getTopCourts = function() {
+  return this.aggregate([
+    { $lookup: { from: 'reviews', localField: '_id', foreignField: 'store', as: 'reviews' }},
+    // Filter for courts with at least 2 reviews
+    { $match: { 'reviews.1': { $exists: true } } },
+    // Add the average reviews field
+    { $project: {
+      photo: '$$ROOT.photo',
+      name: '$$ROOT.name',
+      reviews: '$$ROOT.reviews',
+      slug: '$$ROOT.slug',
+      averageRating: { $avg: '$reviews.rating' }
+    } },
+    { $sort: { averageRating: -1 }},
+    { $limit: 10 }
+  ]);
+};
+
+function autopopulate(next) {
+  this.populate('reviews');
+  next();
+}
+
+courtSchema.pre('find', autopopulate);
+courtSchema.pre('findOne', autopopulate);
+
 module.exports = mongoose.model('Court', courtSchema);

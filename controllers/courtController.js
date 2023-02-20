@@ -156,3 +156,8 @@ exports.hearts = async (req, res) => {
 
   res.render('courts', { title: 'Favorite Courts', courts})
 };
+
+exports.getTopCourts = async (req, res) => {
+  const courts = await Court.getTopCourts();
+  res.render('topCourts', { courts, title:'⭐ Top Courts!'});
+};
